@@ -91,6 +91,7 @@ by following the steps under the `SNMP Extend` heading.
 1. [Certificate](#certificate) - Certificate extend
 1. [C.H.I.P.](#chip) - SNMP extend
 1. [DHCP Stats](#dhcp-stats) - SNMP extend
+1. [Docker Stats](#docker-stats) - SNMP extend
 1. [Entropy](#entropy) - SNMP extend
 1. [EXIM Stats](#exim-stats) - SNMP extend
 1. [Fail2ban](#fail2ban) - SNMP extend
@@ -428,6 +429,31 @@ extend dhcpstats /etc/snmp/dhcp-status.sh
 The application should be auto-discovered as described at the top of
 the page. If it is not, please follow the steps set out under `SNMP
 Extend` heading top of page.
+
+# Docker Stats
+
+It allows you to know which container docker run and their stats.
+
+## SNMP Extend
+
+1: Copy the shell script to the desired host.
+
+```
+wget https://github.com/librenms/librenms-agent/raw/master/snmp/docker-stats.sh -O /etc/snmp/docker-stats.sh
+```
+
+2: Run `chmod +x /etc/snmp/docker-stats.sh`
+
+3: Edit your snmpd.conf file (usually /etc/snmp/snmpd.conf) and add:
+
+```
+extend docker /etc/snmp/docker-stats.sh 
+```
+
+4: Restart snmpd on your host
+```
+systemctl restart snmpd
+```
 
 # Entropy
 
