@@ -434,23 +434,31 @@ Extend` heading top of page.
 
 It allows you to know which container docker run and their stats.
 
+This script require: jq
+
 ## SNMP Extend
 
-1: Copy the shell script to the desired host.
+1: Install jq
+```
+sudo apt install jq
+```
+
+2: Copy the shell script to the desired host.
 
 ```
 wget https://github.com/librenms/librenms-agent/raw/master/snmp/docker-stats.sh -O /etc/snmp/docker-stats.sh
 ```
 
-2: Run `chmod +x /etc/snmp/docker-stats.sh`
+3: Run `chmod +x /etc/snmp/docker-stats.sh`
 
-3: Edit your snmpd.conf file (usually /etc/snmp/snmpd.conf) and add:
+
+4: Edit your snmpd.conf file (usually /etc/snmp/snmpd.conf) and add:
 
 ```
 extend docker /etc/snmp/docker-stats.sh 
 ```
 
-4: Restart snmpd on your host
+5: Restart snmpd on your host
 ```
 systemctl restart snmpd
 ```
